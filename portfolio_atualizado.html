@@ -1,0 +1,569 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio Profissional - Nataly Bento</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --espresso: #3A2620;   /* marrom profundo: header, footer, títulos */
+            --cocoa: #7A5347;      /* marrom médio: texto secundário, bordas */
+            --rose: #D98C93;       /* rosa: destaques, links, botões */
+            --rose-deep: #B5676B;  /* rosa mais escuro: texto sobre rosa claro */
+            --blush: #F6E2DC;      /* rosa muito claro: tarjas, cartões internos */
+            --cream: #FBF6F0;      /* fundo da página */
+            --card: #FFFDFB;       /* fundo dos painéis de conteúdo */
+            --ink: #2A1B16;        /* texto principal */
+            --line: #E8D2C8;       /* linhas/divisórias sutis */
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            font-family: 'Work Sans', Arial, sans-serif;
+            background-color: var(--cream);
+            color: var(--ink);
+            line-height: 1.65;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        h1, h2, h3 {
+            font-family: 'Fraunces', Georgia, serif;
+        }
+
+        /* ===== HEADER / NAV ===== */
+        header {
+            background-color: var(--espresso);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            position: relative;
+        }
+
+        header::after {
+            content: "";
+            display: block;
+            height: 5px;
+            background-image: repeating-linear-gradient(
+                -45deg,
+                var(--rose) 0 6px,
+                var(--cocoa) 6px 12px
+            );
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.1rem 2rem;
+            flex-wrap: wrap;
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+            line-height: 1.15;
+        }
+
+        .brand-name {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--cream);
+        }
+
+        .brand-tag {
+            font-family: 'Work Sans', Arial, sans-serif;
+            font-size: 0.68rem;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--rose);
+            margin-top: 0.3rem;
+        }
+
+        nav ul {
+            position: relative;
+            display: flex;
+            list-style: none;
+            gap: 0.2rem;
+            background-color: #2C1B16;
+            border-radius: 999px;
+            padding: 0.35rem;
+        }
+
+        .nav-indicator {
+            position: absolute;
+            background-color: var(--rose);
+            border-radius: 999px;
+            transition: left 0.35s ease, width 0.35s ease, top 0.35s ease, height 0.35s ease;
+            z-index: 1;
+        }
+
+        nav a {
+            position: relative;
+            z-index: 2;
+            text-decoration: none;
+            display: block;
+            color: var(--cream);
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 0.55rem 1.1rem;
+            border-radius: 999px;
+            transition: color 0.3s ease;
+        }
+
+        nav a:hover {
+            color: var(--rose);
+        }
+
+        nav a.active {
+            color: var(--espresso);
+            font-weight: 600;
+        }
+
+        nav a.active:hover {
+            color: var(--espresso);
+        }
+
+        /* ===== MAIN ===== */
+        main {
+            max-width: 1200px;
+            margin: 2.5rem auto;
+            padding: 0 2rem;
+            flex: 1;
+            width: 100%;
+        }
+
+        .page-section {
+            background-color: var(--card);
+            padding: 2.75rem;
+            border-radius: 14px;
+            border: 1px solid var(--line);
+            box-shadow: 0 10px 30px -18px rgba(58, 38, 32, 0.35);
+            display: none;
+        }
+
+        .page-section.active-section {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        h1 {
+            color: var(--espresso);
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1.6rem;
+            padding-bottom: 0.7rem;
+            border-bottom: 3px solid var(--blush);
+        }
+
+        h2 {
+            color: var(--rose-deep);
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin: 1.8rem 0 1rem 0;
+        }
+
+        p {
+            margin-bottom: 1rem;
+        }
+
+        /* ===== PROJETOS ===== */
+        .project-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .project-card {
+            background-color: var(--blush);
+            border-left: 4px solid var(--rose);
+            padding: 1.5rem;
+            border-radius: 10px;
+        }
+
+        .project-card h3 {
+            color: var(--espresso);
+            font-size: 1.05rem;
+            margin-bottom: 0.6rem;
+        }
+
+        .project-card p {
+            margin-bottom: 0;
+            font-size: 0.95rem;
+        }
+
+        /* ===== TIMELINE ===== */
+        .timeline-item {
+            margin-bottom: 1.6rem;
+            padding-left: 1.2rem;
+            border-left: 3px solid var(--rose);
+        }
+
+        .timeline-date {
+            display: inline-block;
+            background-color: var(--cocoa);
+            color: var(--cream);
+            font-weight: 600;
+            font-size: 0.78rem;
+            padding: 0.2rem 0.75rem;
+            border-radius: 999px;
+            margin-bottom: 0.5rem;
+        }
+
+        .timeline-item h3 {
+            color: var(--espresso);
+            font-size: 1.05rem;
+            margin-bottom: 0.2rem;
+        }
+
+        /* ===== FORMULÁRIO ===== */
+        form {
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            max-width: 600px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        label {
+            font-weight: 600;
+            color: var(--espresso);
+            font-size: 0.92rem;
+        }
+
+        input, textarea {
+            font-family: inherit;
+            padding: 0.75rem;
+            border: 1px solid var(--line);
+            border-radius: 6px;
+            font-size: 1rem;
+            background-color: var(--card);
+            color: var(--ink);
+        }
+
+        input:focus, textarea:focus {
+            outline: 2px solid var(--rose);
+            outline-offset: 1px;
+            border-color: var(--rose);
+        }
+
+        button {
+            background-color: var(--espresso);
+            color: var(--cream);
+            padding: 0.8rem 1.7rem;
+            border: none;
+            border-radius: 999px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            align-self: flex-start;
+        }
+
+        button:hover {
+            background-color: var(--rose);
+            color: var(--espresso);
+        }
+
+        /* ===== TABELA ===== */
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 1.5rem;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        th, td {
+            text-align: left;
+            padding: 0.85rem;
+        }
+
+        th {
+            background-color: var(--espresso);
+            color: var(--cream);
+            font-family: 'Fraunces', Georgia, serif;
+            font-weight: 600;
+        }
+
+        tbody tr:nth-child(even) {
+            background-color: var(--blush);
+        }
+
+        tbody tr:nth-child(odd) {
+            background-color: var(--card);
+        }
+
+        td {
+            border-bottom: 1px solid var(--line);
+        }
+
+        /* ===== LISTAS ===== */
+        ul:not(nav ul) {
+            margin-left: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        /* ===== FOOTER ===== */
+        footer {
+            background-color: var(--espresso);
+            color: var(--cream);
+            text-align: center;
+            padding: 1.5rem;
+            margin-top: auto;
+            border-top: 4px solid var(--rose);
+            font-size: 0.88rem;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(10px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            .page-section.active-section { animation: none; }
+            .nav-indicator { transition: none; }
+        }
+
+        @media (max-width: 640px) {
+            .nav-container { flex-direction: column; align-items: flex-start; }
+            nav ul { flex-wrap: wrap; }
+        }
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="nav-container">
+            <div class="brand">
+                <span class="brand-name">Nataly Bento</span>
+                <span class="brand-tag">TI · Secretariado · Educação</span>
+            </div>
+            <nav>
+                <ul>
+                    <span class="nav-indicator"></span>
+                    <li><a href="#" class="nav-link active" onclick="navigateTo(event, 'home')">Inicial</a></li>
+                    <li><a href="#" class="nav-link" onclick="navigateTo(event, 'sobre')">Sobre</a></li>
+                    <li><a href="#" class="nav-link" onclick="navigateTo(event, 'curriculo')">Currículo</a></li>
+                    <li><a href="#" class="nav-link" onclick="navigateTo(event, 'contato')">Contato</a></li>
+                    <li><a href="#" class="nav-link" onclick="navigateTo(event, 'ajuda')">Ajuda</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <main>
+
+        <section id="home" class="page-section active-section">
+            <h1>Bem-vindo ao Meu Portfólio</h1>
+            <p>Olá! Sou Nataly Emanuele Bento. Este espaço foi desenvolvido para apresentar minha trajetória acadêmica em Tecnologia da Informação, minhas competências consolidadas em Secretariado Executivo e os projetos práticos elaborados ao longo desta jornada de aprendizado.</p>
+
+            <h2>Destaques de Atividades</h2>
+            <div class="project-grid">
+                <div class="project-card">
+                    <h3>BNCC da Computação, Mundo Digital: conhecendo o Pacote Office</h3>
+                    <p>Realizada no auditório da Secretaria de Educação de Garrafão do Norte-PA, onde eu pude ensinar na prática as ferramentas digitais pertencentes ao Pacote Office para professores do ensino básico, como Microsoft Word, Excel, PowerPoint, Outlook, Teams, Power BI e outros.</p>
+                </div>
+                <div class="project-card">
+                    <h3>Segurança na Internet para Jovens e Adolescentes</h3>
+                    <p>Projeto voltado para simplificar conceitos de cibersegurança para jovens e adolescentes do ensino médio, ensinando sobre os perigos online de forma descontraída e de fácil entendimento, além de auxiliar pais e idosos da família com menor familiaridade digital. Projeto ministrado com auxílio dos materiais da NIC.br em escolas estaduais do bairro do Benguí, em Belém.</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="sobre" class="page-section">
+            <h1>Sobre Mim</h1>
+            <p>Com 26 anos e residindo em Belém, PA, sou uma profissional focada em unir a sólida base adquirida em Secretariado Executivo aos conhecimentos técnicos e analíticos da área de Tecnologia da Informação, com o objetivo de desenvolver projetos de educação.</p>
+
+            <h2>Habilidades Técnicas e Interpessoais</h2>
+            <ul>
+                <li><strong>Ferramentas de Produtividade e Dados:</strong> Excel Avançado, Power BI, Google Workspace, OneDrive e Microsoft Office.</li>
+                <li><strong>Comunicação e Documentação:</strong> Redação de documentos técnicos concisos e claros, com excelente comunicação verbal e escrita.</li>
+                <li><strong>Atendimento Estratégico:</strong> Experiência consolidada em relações públicas e suporte direto aos usuários.</li>
+            </ul>
+
+            <h2>Idiomas</h2>
+            <ul>
+                <li>Inglês: Intermediário</li>
+                <li>Espanhol: Intermediário</li>
+                <li>Libras: Básico</li>
+            </ul>
+        </section>
+
+        <section id="curriculo" class="page-section">
+            <h1>Currículo Profissional e Acadêmico</h1>
+
+            <h2>Formação Acadêmica</h2>
+            <div class="timeline-item">
+                <span class="timeline-date">Previsão: 2027</span>
+                <h3>Bacharelado em Tecnologia da Informação</h3>
+                <p>Universidade Federal de Mato Grosso do Sul (UFMS).</p>
+            </div>
+            <div class="timeline-item">
+                <span class="timeline-date">Concluído</span>
+                <h3>MBA em Secretariado</h3>
+                <p>Faculeste.</p>
+            </div>
+            <div class="timeline-item">
+                <span class="timeline-date">Concluído: 2023</span>
+                <h3>Bacharelado em Secretariado Executivo Trilíngue</h3>
+                <p>Universidade do Estado do Pará (UEPA).</p>
+            </div>
+
+            <h2>Experiência Profissional</h2>
+            <div class="timeline-item">
+                <span class="timeline-date">Março 2024 – Abril 2026</span>
+                <h3>Secretaria Municipal de Educação de Garrafão do Norte</h3>
+                <p><strong>Assistente Administrativo:</strong> Atendimento ao público, organização de documentação escolar e suporte em processos de matrículas. Emissão de documentos oficiais, manutenção de sistemas de gestão escolar e organização de arquivos físicos e digitais.</p>
+            </div>
+            <div class="timeline-item">
+                <span class="timeline-date">Outubro 2021 – Abril 2022</span>
+                <h3>Nacional Serviços Integrados LTDA / Receita Federal em Belém</h3>
+                <p><strong>Recepcionista Geral:</strong> Assistência ao público em serviços fornecidos pela Receita Federal, com suporte a contribuintes de baixa literacia digital. Estruturação de pautas para reuniões de gestão e elaboração de planilhas e relatórios utilizando Excel Avançado.</p>
+            </div>
+
+            <h2>Formação Complementar (Destaques)</h2>
+            <ul>
+                <li>Liderança Estratégica com IA na Administração Pública - EVG</li>
+                <li>Resolução de Problemas - ENAP</li>
+                <li>Oficina Básica de Libras - Núcleo de Acessibilidade e Inclusão da UEPA</li>
+                <li>Cultura Digital e Pensamento Computacional - Sec. Mun. de Educação de Garrafão do Norte</li>
+            </ul>
+        </section>
+
+        <section id="contato" class="page-section">
+            <h1>Entre em Contato</h1>
+            <p>Se você deseja falar sobre projetos, oportunidades ou tirar dúvidas, preencha o formulário abaixo:</p>
+
+            <form id="contactForm" onsubmit="handleFormSubmit(event)">
+                <div class="form-group">
+                    <label for="name">Nome completo:</label>
+                    <input type="text" id="name" required placeholder="Digite seu nome">
+                </div>
+                <div class="form-group">
+                    <label for="email">E-mail:</label>
+                    <input type="email" id="email" required placeholder="exemplo@dominio.com">
+                </div>
+                <div class="form-group">
+                    <label for="subject">Assunto:</label>
+                    <input type="text" id="subject" required placeholder="Motivo do contato">
+                </div>
+                <div class="form-group">
+                    <label for="message">Mensagem:</label>
+                    <textarea id="message" rows="5" required placeholder="Escreva sua mensagem aqui..."></textarea>
+                </div>
+                <button type="submit">Enviar Mensagem</button>
+            </form>
+        </section>
+
+        <section id="ajuda" class="page-section">
+            <h1>Documentação de Usabilidade e Padrões</h1>
+            <p>Este protótipo foi projetado seguindo as diretrizes clássicas de IHC (Interação Humano-Computador), garantindo uma experiência intuitiva e livre de barreiras de navegação.</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Princípio / Heurística</th>
+                        <th>Descrição do Conceito</th>
+                        <th>Localização / Aplicação no Projeto</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Visibilidade do status do sistema</strong></td>
+                        <td>O sistema deve sempre manter os usuários informados sobre o que está acontecendo.</td>
+                        <td>Menu de navegação superior: o link da seção ativa recebe uma cápsula rosa que se desloca suavemente até a aba selecionada.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Consistência e Padrões</strong></td>
+                        <td>Os usuários não devem se perguntar se palavras, situações ou ações diferentes significam a mesma coisa.</td>
+                        <td>O uso estrito da mesma paleta de cores, tipografia e espaçamento em todas as cinco seções do arquivo único.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Prevenção de Erros</strong></td>
+                        <td>Melhor do que uma boa mensagem de erro é um design cuidadoso que evita que o problema ocorra.</td>
+                        <td>Formulário de contato usa validação nativa HTML5 (<code>required</code> e <code>type="email"</code>), impedindo envios incompletos.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Controle e Liberdade do Usuário</strong></td>
+                        <td>Usuários frequentemente escolhem funções do sistema por engano e precisam de uma "saída de emergência" clara.</td>
+                        <td>A navegação por clique permite transitar livremente entre qualquer seção a qualquer momento sem travar o progresso.</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+    </main>
+
+    <footer>
+        <p>&copy; 2026 - Todos os direitos reservados. Portfólio de TI - Nataly Bento.</p>
+    </footer>
+
+    <script>
+        function positionIndicator(link) {
+            const indicator = document.querySelector('.nav-indicator');
+            const list = link.closest('ul');
+            const linkRect = link.getBoundingClientRect();
+            const listRect = list.getBoundingClientRect();
+            indicator.style.width = linkRect.width + 'px';
+            indicator.style.height = linkRect.height + 'px';
+            indicator.style.left = (linkRect.left - listRect.left) + 'px';
+            indicator.style.top = (linkRect.top - listRect.top) + 'px';
+        }
+
+        function navigateTo(event, sectionId) {
+            event.preventDefault();
+            const navLinks = document.querySelectorAll('.nav-link');
+            navLinks.forEach(link => link.classList.remove('active'));
+
+            const sections = document.querySelectorAll('.page-section');
+            sections.forEach(section => section.classList.remove('active-section'));
+
+            event.target.classList.add('active');
+            positionIndicator(event.target);
+
+            const targetSection = document.getElementById(sectionId);
+            if (targetSection) {
+                targetSection.classList.add('active-section');
+            }
+
+            window.scrollTo(0, 0);
+        }
+
+        function handleFormSubmit(event) {
+            event.preventDefault();
+            alert("Sucesso! O formulário foi validado e enviado simuladamente.");
+            document.getElementById('contactForm').reset();
+        }
+
+        function initIndicator() {
+            const activeLink = document.querySelector('.nav-link.active');
+            if (activeLink) positionIndicator(activeLink);
+        }
+
+        window.addEventListener('load', initIndicator);
+        window.addEventListener('resize', initIndicator);
+        if (document.fonts) {
+            document.fonts.ready.then(initIndicator);
+        }
+    </script>
+</body>
+</html>
